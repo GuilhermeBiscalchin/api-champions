@@ -1,5 +1,10 @@
- import express, { Request, Response } from "express";
- 
- export const getPlayer = (request: Request, response: Response) => {
-    response.status(200).json({ player: "Maradona" });
-  }
+import express, { Request, Response } from "express";
+import { getPlayerService } from "../service/player-service";
+import { ok } from "../utils/http-helper";
+
+export const getPlayer = async (request: Request, response: Response) => {
+  const data = await getPlayerService();
+  const responseCode = await ok(data);
+
+  response.status(responseCode.statusCode).json(responseCode.body);
+};
