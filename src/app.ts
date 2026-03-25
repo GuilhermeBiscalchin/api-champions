@@ -1,13 +1,13 @@
-import express, { Request, Response } from "express";
+import express from "express";
+
+import router from "./routes";
 
 function createApp() {
   const app = express();
 
   app.use(express.json());
 
-  app.get("/", (request: Request, response: Response) => {
-    response.status(200).json({ player: "Messi" });
-  });
+  app.use("/api", router);
   return app;
 }
 
